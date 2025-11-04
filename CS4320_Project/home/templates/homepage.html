@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to MyWallet</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'Homepage.css' %}">
+</head>
+
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Harmonet</div>
+        <div class="auth-buttons">
+            <button onclick="location.href='{% url 'login' %}'">Login</button>
+            <button onclick="location.href='{% url 'register' %}'">Sign Up</button>
+             
+        </div>
+      </nav>
+    
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1>Save Smarter, Live Better</h1>
+      <p>Your financial freedom starts here. Track spending, grow savings, and learn Budgeting with MyWallet.</p>
+      <button onclick="location.href='SignupPage.html'">Get Started</button>
+    </div>
+    <div class="hero-image">
+      <img src="" alt="Banking illustration" />
+    </div>
+  </header>
+
+  <section class="features-section">
+    <h2>Why Choose MyWallet?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>🔒 Budgeting Planners</h3>
+        <p>We use the latest encryption and security protocols to protect your data and money.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📱 Easy to Use</h3>
+        <p>Our app is designed with simplicity in mind. Manage your finances anytime, anywhere.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📊 Smart Insights</h3>
+        <p>Get real-time insights into your spending, income, and saving habits.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 MyWallet. All rights reserved.</p>
+  </footer>
+</body>
+</html>
