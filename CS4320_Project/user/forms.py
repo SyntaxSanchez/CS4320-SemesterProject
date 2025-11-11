@@ -19,3 +19,13 @@ class UserRegisterForm(UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("A user with that username already exists.")
         return username
+
+
+# forms.py
+from django import forms
+from .models import Profile
+
+class MonthlyIncomeForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['monthly_income']

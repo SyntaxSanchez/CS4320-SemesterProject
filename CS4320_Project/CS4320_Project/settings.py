@@ -142,3 +142,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://app-cs4300sanchez-19.devedu.io'
     
     ]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'landingPage'
+LOGOUT_REDIRECT_URL = 'index'

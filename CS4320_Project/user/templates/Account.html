@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyWallet - Account</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'Account.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MyWallet</div>
+        <ul class="nav-links">
+          <li><a href="{% url 'landingPage' %}">Dashboard</a></li>
+          <li><a href="{% url 'account' %}" class="active-link">Account</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+        <div class="auth-buttons">
+          <button>Logout</button>
+        </div>
+      </nav>
+
+  <!-- Account Overview Section -->
+  <section class="account-page">
+    <h1 class="account-title">👤 Your Account</h1>
+
+    <div class="account-grid">
+      <!-- Profile Info -->
+      <div class="account-card profile-info">
+        <h3>Personal Information</h3>
+        <div class="profile-details">
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Member Since:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+        </div>
+        <button class="edit-btn">Edit Profile</button>
+      </div>
+
+      <!-- Account Settings -->
+      <div class="account-card account-settings">
+        <h3>Account Settings</h3>
+        <ul>
+          <li><a href="#">Change Password</a></li>
+          <li><a href="#">Two-Factor Authentication</a></li>
+          <li><a href="#">Manage Linked Accounts</a></li>
+        </ul>
+      </div>
+
+<!-- Monthly Income Section -->
+<div class="account-card monthly-income">
+  <h3>🏦 Monthly Income</h3>
+
+  <!-- Show current income or placeholder -->
+  <p>
+    <strong>Your Current Income:</strong>
+    ${{ user.profile.monthly_income|default:"0.00" }}
+  </p>
+
+  <!-- Monthly income input form -->
+  <form method="POST" action="{% url 'account' %}">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Render the form here -->
+    <button type="submit" class="save-income-btn">Save Income</button>
+  </form>
+</div>
+
+
+  <footer class="footer">
+    <p>© 2025 MyWallet. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
