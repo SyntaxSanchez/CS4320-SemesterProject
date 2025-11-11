@@ -25,8 +25,12 @@ SECRET_KEY = 'django-insecure-twui!qz#yfrg2ca1=8$__zya@2eg65(=3bj*8)0wu&!vrv%t1o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'app-cs4300sanchez-19.devedu.io',
+    'localhost',
+    'editor-cs4300sanchez-19.devedu.io',
+    '*', 
+]
 
 # Application definition
 
@@ -132,3 +136,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://app-cs4300sanchez-19.devedu.io'
+    
+    ]
