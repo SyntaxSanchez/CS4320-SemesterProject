@@ -11,8 +11,8 @@
   <nav class="navbar">
     <div class="logo">MyWallet</div>
     <ul class="nav-links">
-      <li><a href="{% url 'landingPage' %}">Dashboard</a></li>
-      <li><a href="{% url 'account' %}" class="active-link">Account</a></li>
+      <li><a href="{% url 'landingPage' %}" class="active-link">Dashboard</a></li>
+      <li><a href="{% url 'account' %}">Account</a></li>
       <li><a href="#">Settings</a></li>
     </ul>
     <div class="auth-buttons">
@@ -20,44 +20,122 @@
     </div>
   </nav>
 
-    <section class="hero-slider" id="heroSlider">
-        <p> CONTENT HERE </p>
-        <div class="slide active" style="background-image: url('https://via.placeholder.com/1200x400?text=Banking+Made+Simple');"></div>
-        <div class="slide" style="background-image: url('https://via.placeholder.com/1200x400?text=Track+Your+Spending');"></div>
-        <div class="slide" style="background-image: url('https://via.placeholder.com/1200x400?text=Secure+and+Reliable');"></div>
-    </section>
+  <section class="hero-slider" id="heroSlider">
+    <div class="slide active" style="background-image: url('https://source.unsplash.com/1200x400/?finance');"></div>
+    <div class="slide" style="background-image: url('https://source.unsplash.com/1200x400/?banking');"></div>
+    <div class="slide" style="background-image: url('https://source.unsplash.com/1200x400/?money');"></div>
+    <div class="slide" style="background-image: url('https://source.unsplash.com/1200x400/?savings');"></div>
+  </section>
+  
 
+
+  {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <section class="dashboard homepage-dashboard">
     <h1 class="dashboard-title">Welcome back, {{ user.username }}👋</h1>
-
     <div class="dashboard-grid">
       <div class="dashboard-card income-card">
         <h3>🏦 Monthly Income</h3>
         <p class="income-amount">${{ monthly_income|floatformat:2 }}</p>
-      </div>
-      
-      
-
-      <div class="dashboard-card">
-        <h3>💸 Recent Purchases</h3>
-        <ul>
-          <li>Amazon Purchase - $120</li>
-          <li>DoorDash - $45</li>
-          <li>Uber - $35</li>
-        </ul>
+        {% if monthly_income == 0 %}
+          <p style="color: #e74c3c; font-size: 0.9rem; margin-top: 0.5rem;">
+            Please set your monthly income in your <a href="{% url 'account' %}" style="color: #4ea1d3;">account settings</a>
+          </p>
+        {% endif %}
       </div>
 
+      <div class="dashboard-card expenses-card">
+        <h3>💸 Total Expenses</h3>
+        <p class="expenses-amount">${{ total_expenses|floatformat:2 }}</p>
+      </div>
+
+      <div class="dashboard-card remaining-card {% if remaining_budget < 0 %}negative-budget{% endif %}">
+        <h3>💰 Remaining Budget</h3>
+        <p class="remaining-amount">
+          ${{ remaining_budget|floatformat:2 }}
+        </p>
+      </div>
+    </div>
+
+    <div class="dashboard-grid" style="margin-top: 2rem;">
       <div class="dashboard-card">
+        <h3>📝 Manage Expenses</h3>
+        <p>Input and track your monthly expenses</p>
+        <a href="{% url 'expenses' %}" class="card-link">Input expenses →</a>
+      </div>
+
+      <div class="dashboard-card spending-overview">
         <h3>📊 Spending Overview</h3>
-        <p>You’ve spent <strong>$3,200</strong> this month</p>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 64%;"></div>
-        </div>
+        <p>You've spent <strong>${{ total_expenses|floatformat:2 }}</strong> this month</p>
+        
+        {% if monthly_income > 0 %}
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: {% if percentage_spent > 100 %}100{% else %}{{ percentage_spent|floatformat:0 }}{% endif %}%; 
+                 background: {% if percentage_spent > 100 %}#e74c3c{% elif percentage_spent > 80 %}#f39c12{% else %}#4ea1d3{% endif %};"></div>
+          </div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+            <strong>{{ percentage_spent|floatformat:1 }}%</strong> of your monthly income
+            {% if percentage_spent > 100 %}
+              <span style="color: #e74c3c; display: block; margin-top: 0.3rem;">⚠️ You've exceeded your budget!</span>
+            {% elif percentage_spent > 80 %}
+              <span style="color: #f39c12; display: block; margin-top: 0.3rem;">⚠️ You're approaching your limit</span>
+            {% endif %}
+          </p>
+        {% else %}
+          <p style="color: #e74c3c; margin-top: 1rem;">Set your monthly income to track spending</p>
+        {% endif %}
       </div>
     </div>
   </section>
-  <script src="script.js"></script>
+
+  <section class="dashboard homepage-dashboard-strat">
+    <div class="dashboard-grid">
+      <div class="dashboard-card strategy-card">
+        <h3>💳 Debt Strategies</h3>
+        <p>Tools to help you manage and eliminate debt effectively</p>
+        <a href="{% url 'debt_strategies' %}" class="strategy-btn">View Debt Strategies</a>
+      </div>
+
+      <div class="dashboard-card strategy-card">
+        <h3>💰 Saving Strategies</h3>
+        <p>Recommended savings: <strong>${{ savings_goal|floatformat:2 }}</strong> (20% of income)</p>
+        <a href="{% url 'saving_strategies' %}" class="strategy-btn">View Saving Strategies</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 MyWallet. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.hero-slider .slide');
+      let current = 0;
+
+      function showNextSlide() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }
+
+      // change image every 5 seconds
+      setInterval(showNextSlide, 5000);
+    });
+  </script>
+</body>
+</html>
+
+
+
 
 </body>
 </html>

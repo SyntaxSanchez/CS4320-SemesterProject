@@ -1,231 +1,54 @@
-/* Global Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body Styling */
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f7fb;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  /* Navbar */
-  .navbar {
-    background: #1e2a38;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links a:hover {
-    color: #4ea1d3;
-  }
-  
-  /* Auth Buttons */
-  .auth-buttons button {
-    margin-left: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    background: #4ea1d3;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .auth-buttons button:hover {
-    background: #3a8bbd;
-  }
-  
-  /* Hero Slider */
-  .hero-slider {
-    position: relative;
-    height: 400px;
-    overflow: hidden;
-    border-radius: 10px;
-    max-width: 1200px;
-    margin: 3rem auto;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-  
-  .hero-slider p {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: white;
-    font-size: 1.5rem;
-    z-index: 10;
-    background: rgba(0,0,0,0.4);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-  }
-  
-  .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-  }
-  
-  .slide.active {
-    opacity: 1;
-  }
-  
-  /* Dashboard Section */
-  .dashboard {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  }
-  
-  .dashboard-title {
-    font-size: 2rem;
-    color: #1e2a38;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-  
-  .dashboard-card {
-    background: #f9fbfe;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  }
-  
-  .dashboard-card h3 {
-    color: #1e2a38;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
-  
-  .dashboard-card p, 
-  .dashboard-card li {
-    color: #555;
-    font-size: 1rem;
-  }
-  
-  .dashboard-card ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .dashboard-card ul li {
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Progress Bar */
-  .progress-bar {
-    background: #e0e6ed;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 10px;
-    margin-top: 1rem;
-  }
-  
-  .progress-fill {
-    background: #4ea1d3;
-    height: 100%;
-    border-radius: 20px;
-    transition: width 0.5s ease;
-  }
-  
-  /* Footer (optional if you add one) */
-  .footer {
-    background: #1e2a38;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-  }
-  
-/* Dashboard Cards */
-.dashboard-card {
-    background: #f9fbfe;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: default; /* optional, gives hover feel */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Hover Effect */
-.dashboard-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f7fb;
+  color: #333;
+  line-height: 1.6;
 }
 
-/* Monthly Income Card Styling */
-.income-card {
-    background: linear-gradient(190deg, #1e2a38, #1e90ff);
-    color: white;
-    position: relative;
-    overflow: hidden;
+/* Navbar */
+.navbar {
+  background: #1e2a38;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
 }
 
-.income-card h3 {
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.income-card .income-amount {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #fff;
-    margin-top: 0.5rem;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
 }
 
-/* Optional: a subtle pattern overlay */
-.income-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(255,255,255,0.05);
-    pointer-events: none;
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
+.nav-links a:hover {
+  color: #4ea1d3;
+}
 
+.active-link {
+  color: #4ea1d3 !important;
+}
+
+/* Auth Buttons */
 .auth-buttons {
   display: flex;
   justify-content: flex-end;
@@ -234,33 +57,324 @@
 
 .auth-buttons a {
   display: inline-block;
-  padding: 0.25rem 1.0rem;
-  background: #4ea1d3;
+  padding: 0.6rem 1.5rem;
+  background: #e74c3c;
   color: white;
   font-size: 1rem;
   font-weight: 600;
-  text-transform: uppercase;
-  border-radius: 25px;
+  border-radius: 6px;
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
 }
-
 
 .auth-buttons a:hover {
-  background: #3a8bbd;
-  transform: translateY(-2px); /* lift effect */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* deeper shadow on hover */
+  background: #c0392b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
 }
-
 
 .auth-buttons a:active {
-  background: #1e6c8f;
-  transform: translateY(0); /* remove lift effect when clicked */
+  transform: translateY(0);
 }
 
+/* Hero Slider */
+.hero-slider {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 3rem auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
 
-.auth-buttons a:focus {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(78, 161, 211, 0.6); /* subtle glow on focus */
+.hero-slider p {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 10;
+  background: rgba(0,0,0,0.4);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Dashboard Section */
+.dashboard {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  color: #1e2a38;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Dashboard Cards - Base Style */
+.dashboard-card {
+  background: #f9fbfe;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.dashboard-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.dashboard-card p, 
+.dashboard-card li {
+  color: #555;
+  font-size: 1rem;
+}
+
+.dashboard-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dashboard-card ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Monthly Income Card - Gradient Style */
+.income-card {
+  background: linear-gradient(135deg, #1e2a38, #4ea1d3);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.income-card h3 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.income-card .income-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.income-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+
+/* Total Expenses Card - Red Gradient Style */
+.expenses-card {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.expenses-card h3 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.expenses-card .expenses-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.expenses-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+
+/* Remaining Budget Card - Green Gradient Style */
+.remaining-card {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.remaining-card h3 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.remaining-card .remaining-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff !important;
+  margin-top: 0.5rem;
+}
+
+.remaining-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+
+/* Override for negative budget - make it red gradient */
+.remaining-card.negative-budget {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+/* Progress Bar */
+.progress-bar {
+  background: #e0e6ed;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 20px;
+  margin-top: 1rem;
+}
+
+.progress-fill {
+  background: #4ea1d3;
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.5s ease, background 0.3s ease;
+}
+
+/* Messages */
+.messages-container {
+  max-width: 1200px;
+  margin: 1rem auto;
+  padding: 0 2rem;
+}
+
+.alert {
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Card Link Styling */
+.card-link {
+  color: #4ea1d3;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.card-link:hover {
+  color: #357a9b;
+}
+
+/* Spending Overview Card */
+.spending-overview p {
+  color: #555;
+}
+
+.spending-overview strong {
+  color: #1e2a38;
+}
+
+/* Footer */
+.footer {
+  background: #1e2a38;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-slider {
+    height: 150px;
+    margin: 1.5rem auto;
+  }
 }

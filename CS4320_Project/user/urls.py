@@ -2,19 +2,21 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
+
 urlpatterns = [
-    # Public pages
     path('', views.index, name='index'),
+    path('expenses/', views.expenses, name='expenses'),
+    path('landingPage/', views.landingPage, name='landingPage'),
+    path('account/', views.account_view, name='account'),
+    path('debt-strategies/', views.debt_strategies, name='debt_strategies'),
+    path('saving-strategies/', views.saving_strategies, name='saving_strategies'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
-    path('account/', views.account_view, name='account'),
 
 
-    # Protected page (requires login)
     path('landingPage/', views.landingPage, name='landingPage'),
 
-    # Password reset flow
     path('password-reset/',
          auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'),
          name='password_reset'),

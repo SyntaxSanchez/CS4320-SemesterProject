@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Debt Strategies | MyWallet</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'expenses.css' %}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">MyWallet</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'landingPage' %}">Dashboard</a></li>
+      <li><a href="{% url 'account' %}">Account</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Display messages -->
+  {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main class="expenses-container">
+    <div class="expenses-box">
+      <h1 style="text-align: center; color: #1e2a38; margin-bottom: 2rem;">💳 Debt Management Strategies</h1>
+      
+      <!-- Summary Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 1.5rem; border-radius: 10px;">
+          <h3 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.9;">Total Debt</h3>
+          <p style="margin: 0; font-size: 2rem; font-weight: bold;">${{ total_debt|floatformat:2 }}</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 1.5rem; border-radius: 10px;">
+          <h3 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.9;">Min. Payments</h3>
+          <p style="margin: 0; font-size: 2rem; font-weight: bold;">${{ total_minimum|floatformat:2 }}/mo</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #4ea1d3, #357a9b); color: white; padding: 1.5rem; border-radius: 10px;">
+          <h3 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.9;">Extra Payment</h3>
+          <p style="margin: 0; font-size: 2rem; font-weight: bold;">${{ available_for_debt|floatformat:2 }}</p>
+        </div>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- Add Debt Form -->
+      <section class="expenses-section">
+        <h2>Add Your Debts</h2>
+        <p>Enter all your debts to generate personalized payoff strategies</p>
+
+        <form method="POST" class="expense-form">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+          </div>
+
+          <div class="form-group">
+            {{ form.debt_type.label_tag }}
+            {{ form.debt_type }}
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              {{ form.balance.label_tag }}
+              {{ form.balance }}
+            </div>
+
+            <div class="form-group">
+              {{ form.interest_rate.label_tag }}
+              {{ form.interest_rate }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {{ form.minimum_payment.label_tag }}
+            {{ form.minimum_payment }}
+          </div>
+
+          <button type="submit" class="btn-add-expense">+ Add Debt</button>
+        </form>
+      </section>
+
+      <hr class="divider">
+
+      <!-- Debt List -->
+      {% if debts %}
+        <section class="expense-list-section">
+          <h2 style="margin-bottom: 1.5rem;">Your Debts</h2>
+
+          {% for debt in debts %}
+            <div class="expense-card">
+              <div class="expense-info">
+                <div class="expense-icon">💳</div>
+
+                <div>
+                  <span class="expense-description">{{ debt.name }}</span>
+                  <p class="expense-amount">💰 Balance: ${{ debt.balance|floatformat:2 }}</p>
+                  <p class="expense-date">📊 Interest: {{ debt.interest_rate }}% | Min Payment: ${{ debt.minimum_payment|floatformat:2 }}</p>
+                </div>
+              </div>
+
+              <form method="POST" style="margin-left: 1rem;">
+                {% csrf_token %}
+                <input type="hidden" name="delete_debt_id" value="{{ debt.id }}">
+                <button type="submit" class="btn-remove-expense">Remove</button>
+              </form>
+            </div>
+          {% endfor %}
+        </section>
+
+        <hr class="divider">
+
+        <!-- Debt Payoff Strategies -->
+        <section style="margin-top: 2rem;">
+          <h2 style="text-align: center; margin-bottom: 2rem;">📋 Your Personalized Payoff Plans</h2>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+            
+            <!-- Snowball Method -->
+            <div style="background: #f0f9ff; padding: 2rem; border-radius: 10px; border: 2px solid #4ea1d3;">
+              <h3 style="color: #1e2a38; margin-bottom: 1rem;">❄️ Debt Snowball Method</h3>
+              <p style="color: #666; margin-bottom: 1.5rem;">Pay smallest debts first for quick wins and motivation</p>
+              
+              {% if snowball_plan %}
+                <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                  <p style="font-weight: 600; color: #1e2a38; margin-bottom: 0.5rem;">Payment Order:</p>
+                  {% for item in snowball_plan %}
+                    <div style="padding: 0.8rem; background: #f9fbfe; border-radius: 6px; margin-bottom: 0.5rem;">
+                      <p style="margin: 0; font-weight: 600; color: #1e2a38;">{{ forloop.counter }}. {{ item.debt.name }}</p>
+                      <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #666;">
+                        Pay ${{ item.payment|floatformat:2 }}/month → Payoff in {{ item.months }} months
+                      </p>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <p style="color: #e74c3c;">Add extra payment budget to see your plan</p>
+              {% endif %}
+            </div>
+
+            <!-- Avalanche Method -->
+            <div style="background: #fff5f5; padding: 2rem; border-radius: 10px; border: 2px solid #e74c3c;">
+              <h3 style="color: #1e2a38; margin-bottom: 1rem;">🔥 Debt Avalanche Method</h3>
+              <p style="color: #666; margin-bottom: 1.5rem;">Pay highest interest debts first to save money</p>
+              
+              {% if avalanche_plan %}
+                <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                  <p style="font-weight: 600; color: #1e2a38; margin-bottom: 0.5rem;">Payment Order:</p>
+                  {% for item in avalanche_plan %}
+                    <div style="padding: 0.8rem; background: #f9fbfe; border-radius: 6px; margin-bottom: 0.5rem;">
+                      <p style="margin: 0; font-weight: 600; color: #1e2a38;">{{ forloop.counter }}. {{ item.debt.name }}</p>
+                      <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #666;">
+                        Pay ${{ item.payment|floatformat:2 }}/month → Payoff in {{ item.months }} months
+                      </p>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <p style="color: #e74c3c;">Add extra payment budget to see your plan</p>
+              {% endif %}
+            </div>
+
+          </div>
+        </section>
+
+      {% else %}
+        <p class="no-expenses-msg">No debts added yet. Add your debts above to generate payoff strategies!</p>
+      {% endif %}
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 MyWallet. All rights reserved.</p>
+  </footer>
+</body>
+</html>

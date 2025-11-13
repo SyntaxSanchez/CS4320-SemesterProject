@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saving Strategies | MyWallet</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'expenses.css' %}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">MyWallet</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'landingPage' %}">Dashboard</a></li>
+      <li><a href="{% url 'account' %}">Account</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+    </div>
+  </nav>
+
+  <main class="expenses-container">
+    <div class="expenses-box">
+      <h1 style="text-align: center; color: #1e2a38; margin-bottom: 2rem;">💰 Saving Strategies</h1>
+
+      <!-- Your Financial Overview -->
+      <section style="background: #f0f9ff; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+        <h2 style="color: #1e2a38; margin-bottom: 1.5rem;">📊 Your Financial Overview</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div>
+            <p style="margin: 0; color: #666; font-size: 0.9rem;">Monthly Income</p>
+            <p style="margin: 0.3rem 0 0 0; font-size: 1.8rem; font-weight: bold; color: #1e2a38;">${{ monthly_income|floatformat:2 }}</p>
+          </div>
+          <div>
+            <p style="margin: 0; color: #666; font-size: 0.9rem;">Total Expenses</p>
+            <p style="margin: 0.3rem 0 0 0; font-size: 1.8rem; font-weight: bold; color: #e74c3c;">${{ total_expenses|floatformat:2 }}</p>
+          </div>
+          <div>
+            <p style="margin: 0; color: #666; font-size: 0.9rem;">Debt Payments</p>
+            <p style="margin: 0.3rem 0 0 0; font-size: 1.8rem; font-weight: bold; color: #f39c12;">${{ total_debt_payment|floatformat:2 }}</p>
+          </div>
+          <div>
+            <p style="margin: 0; color: #666; font-size: 0.9rem;">Available to Save</p>
+            <p style="margin: 0.3rem 0 0 0; font-size: 1.8rem; font-weight: bold; color: #2ecc71;">${{ actual_available|floatformat:2 }}</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- 50/30/20 Rule -->
+      <section style="margin-bottom: 3rem;">
+        <h2 style="color: #1e2a38; margin-bottom: 1rem;">📋 The 50/30/20 Budgeting Rule</h2>
+        <p style="color: #666; margin-bottom: 2rem;">This popular budgeting method divides your after-tax income into three categories</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          
+          <!-- Needs - 50% -->
+          <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 2rem; border-radius: 10px; position: relative; overflow: hidden;">
+            <div style="position: relative; z-index: 1;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏠</div>
+              <h3 style="margin: 0 0 1rem 0; font-size: 1.5rem;">50% Needs</h3>
+              <p style="margin: 0 0 1rem 0; font-size: 2rem; font-weight: bold;">${{ needs|floatformat:2 }}</p>
+              <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Essential expenses: rent, utilities, groceries, insurance, minimum debt payments</p>
+            </div>
+          </div>
+
+          <!-- Wants - 30% -->
+          <div style="background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; padding: 2rem; border-radius: 10px; position: relative; overflow: hidden;">
+            <div style="position: relative; z-index: 1;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎬</div>
+              <h3 style="margin: 0 0 1rem 0; font-size: 1.5rem;">30% Wants</h3>
+              <p style="margin: 0 0 1rem 0; font-size: 2rem; font-weight: bold;">${{ wants|floatformat:2 }}</p>
+              <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Non-essentials: dining out, entertainment, hobbies, shopping, subscriptions</p>
+            </div>
+          </div>
+
+          <!-- Savings - 20% -->
+          <div style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 2rem; border-radius: 10px; position: relative; overflow: hidden;">
+            <div style="position: relative; z-index: 1;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">💎</div>
+              <h3 style="margin: 0 0 1rem 0; font-size: 1.5rem;">20% Savings</h3>
+              <p style="margin: 0 0 1rem 0; font-size: 2rem; font-weight: bold;">${{ savings|floatformat:2 }}</p>
+              <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Savings, investments, extra debt payments, retirement contributions</p>
+            </div>
+          </div>
+
+        </div>
+
+        {% if actual_available < savings %}
+          <div style="background: #fff3cd; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #f39c12;">
+            <p style="margin: 0; color: #856404;">
+              ⚠️ <strong>Attention:</strong> You currently have ${{ actual_available|floatformat:2 }} available to save, which is less than the recommended 20% (${{ savings|floatformat:2 }}). 
+              Consider reviewing your expenses or increasing your income to meet your savings goals.
+            </p>
+          </div>
+        {% elif actual_available >= savings %}
+          <div style="background: #d4edda; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid #2ecc71;">
+            <p style="margin: 0; color: #155724;">
+              ✅ <strong>Great job!</strong> You have ${{ actual_available|floatformat:2 }} available to save, meeting or exceeding the 20% rule (${{ savings|floatformat:2 }})!
+            </p>
+          </div>
+        {% endif %}
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Emergency Fund -->
+      <section style="margin-bottom: 3rem;">
+        <h2 style="color: #1e2a38; margin-bottom: 1rem;">🚨 Emergency Fund Goal</h2>
+        <p style="color: #666; margin-bottom: 2rem;">Financial experts recommend saving 3-6 months of expenses for unexpected emergencies</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          
+          <!-- Minimum Emergency Fund -->
+          <div style="background: #f9fbfe; padding: 2rem; border-radius: 10px; border: 2px solid #4ea1d3;">
+            <h3 style="color: #1e2a38; margin-bottom: 1rem;">📦 Minimum Fund (3 months)</h3>
+            <p style="margin: 0 0 1rem 0; font-size: 2.5rem; font-weight: bold; color: #4ea1d3;">${{ emergency_fund_min|floatformat:2 }}</p>
+            <p style="margin: 0 0 1rem 0; color: #666;">Based on your monthly expenses of ${{ total_expenses|floatformat:2 }}</p>
+            
+            {% if savings > 0 %}
+              <div style="background: white; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                <p style="margin: 0; color: #1e2a38; font-weight: 600;">⏱️ Time to Goal:</p>
+                <p style="margin: 0.5rem 0 0 0; font-size: 1.3rem; color: #4ea1d3; font-weight: bold;">{{ months_to_emergency_min }} months</p>
+                <p style="margin: 0.3rem 0 0 0; font-size: 0.85rem; color: #666;">Saving ${{ savings|floatformat:2 }}/month</p>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Maximum Emergency Fund -->
+          <div style="background: #f9fbfe; padding: 2rem; border-radius: 10px; border: 2px solid #2ecc71;">
+            <h3 style="color: #1e2a38; margin-bottom: 1rem;">🎯 Ideal Fund (6 months)</h3>
+            <p style="margin: 0 0 1rem 0; font-size: 2.5rem; font-weight: bold; color: #2ecc71;">${{ emergency_fund_max|floatformat:2 }}</p>
+            <p style="margin: 0 0 1rem 0; color: #666;">Based on your monthly expenses of ${{ total_expenses|floatformat:2 }}</p>
+            
+            {% if savings > 0 %}
+              <div style="background: white; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                <p style="margin: 0; color: #1e2a38; font-weight: 600;">⏱️ Time to Goal:</p>
+                <p style="margin: 0.5rem 0 0 0; font-size: 1.3rem; color: #2ecc71; font-weight: bold;">{{ months_to_emergency_max }} months</p>
+                <p style="margin: 0.3rem 0 0 0; font-size: 0.85rem; color: #666;">Saving ${{ savings|floatformat:2 }}/month</p>
+              </div>
+            {% endif %}
+          </div>
+
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Additional Saving Tips -->
+      <section>
+        <h2 style="color: #1e2a38; margin-bottom: 1.5rem;">💡 Smart Saving Strategies</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          
+          <div style="background: #f9fbfe; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #4ea1d3;">
+            <h3 style="color: #1e2a38; margin-bottom: 0.8rem;">🤖 Automate Your Savings</h3>
+            <p style="margin: 0; color: #666;">Set up automatic transfers to your savings account on payday. You won't miss what you don't see!</p>
+          </div>
+
+          <div style="background: #f9fbfe; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #2ecc71;">
+            <h3 style="color: #1e2a38; margin-bottom: 0.8rem;">🎯 Pay Yourself First</h3>
+            <p style="margin: 0; color: #666;">Treat savings as a non-negotiable expense. Save before spending on wants.</p>
+          </div>
+
+          <div style="background: #f9fbfe; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #9b59b6;">
+            <h3 style="color: #1e2a38; margin-bottom: 0.8rem;">🏦 High-Yield Savings</h3>
+            <p style="margin: 0; color: #666;">Use a high-yield savings account to earn more interest on your emergency fund.</p>
+          </div>
+
+          <div style="background: #f9fbfe; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #e74c3c;">
+            <h3 style="color: #1e2a38; margin-bottom: 0.8rem;">📉 Cut Unnecessary Costs</h3>
+            <p style="margin: 0; color: #666;">Review subscriptions, reduce dining out, and find cheaper alternatives to boost savings.</p>
+          </div>
+
+          <div style="background: #f9fbfe; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #f39c12;">
+            <h3 style="color: #1e2a38; margin-bottom: 0.8rem;">📈 Increase Income</h3>
+            <p style="margin: 0; color: #666;">Consider a side hustle, freelancing, or asking for a raise to boost your savings rate.</p>
+          </div>
+
+          <div style="background: #f9fbfe; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #1abc9c;">
+            <h3 style="color: #1e2a38; margin-bottom: 0.8rem;">🎁 Save Windfalls</h3>
+            <p style="margin: 0; color: #666;">Put tax refunds, bonuses, and gifts directly into savings to reach goals faster.</p>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 MyWallet. All rights reserved.</p>
+  </footer>
+</body>
+</html>

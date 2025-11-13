@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monthly Expenses | Expense Tracker</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'expenses.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">Expense Tracker</div>
+      
+    <div class="auth-buttons">
+      <a href="{% url 'landingPage' %}" class="btn-dashboard">Dashboard</a>
+      <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+    </div>
+  </nav>
+
+  <main class="expenses-container">
+    <div class="expenses-box">
+      <hr class="section-divider" />
+  
+      <section class="expenses-section">
+        <h2>Track Your Expenses 💰</h2>
+        <p>Add your expenses below and keep track of your spending.</p>
+  
+        <form method="POST" class="expense-form">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+          </div>
+  
+          <div class="form-group">
+            {{ form.amount.label_tag }}
+            {{ form.amount }}
+          </div>
+  
+          <button type="submit" class="btn-add-expense">+ Add Expense</button>
+        </form>
+  
+        <hr class="divider">
+  
+        <section class="expense-list-section">
+          {% if expenses %}
+            <div class="total-spent-box">
+              <h3>Total Spent: ${{ total_amount|floatformat:2 }}</h3>
+            </div>
+
+            {% for expense in expenses %}
+              <div class="expense-card">
+                
+                <div class="expense-info">
+                  <div class="expense-icon">💵</div>
+  
+                  <div>
+                    <span class="expense-description">{{ expense.description }}</span>
+                    <p class="expense-amount">💸 Amount: ${{ expense.amount }}</p>
+                    <p class="expense-date">📅 Date: {{ expense.created_at|date:"M d, Y" }}</p>
+                  </div>
+                </div>
+  
+                <form method="POST" style="margin-left: 1rem;">
+                  {% csrf_token %}
+                  <input type="hidden" name="delete_expense_id" value="{{ expense.id }}">
+                  <button type="submit" class="btn-remove-expense">Remove</button>
+                </form>
+              </div>
+            {% endfor %}
+  
+            <div class="pagination">
+              {% if expenses.has_previous %}
+                <a href="?page={{ expenses.previous_page_number }}" class="page-btn">Previous</a>
+              {% endif %}
+              <span class="current-page">Page {{ expenses.number }} of {{ expenses.paginator.num_pages }}</span>
+              {% if expenses.has_next %}
+                <a href="?page={{ expenses.next_page_number }}" class="page-btn">Next</a>
+              {% endif %}
+            </div>
+  
+          {% else %}
+            <p class="no-expenses-msg">No expenses added yet. Add one above!</p>
+          {% endif %}
+        </section>
+      </section>
+  
+      <hr class="section-divider" />
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <p>&copy; 2025 Expense Tracker. All rights reserved.</p>
+  </footer>
+  
+</body>
+</html>
