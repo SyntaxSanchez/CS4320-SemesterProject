@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MyWallet - Account</title>
+  <title>MyWallet | Account</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'Account.css' %}">
 </head>
@@ -14,10 +14,9 @@
         <ul class="nav-links">
           <li><a href="{% url 'landingPage' %}">Dashboard</a></li>
           <li><a href="{% url 'account' %}" class="active-link">Account</a></li>
-          <li><a href="#">Settings</a></li>
         </ul>
         <div class="auth-buttons">
-          <button>Logout</button>
+          <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
         </div>
       </nav>
 

@@ -11,7 +11,7 @@
 
 <body>
     <nav class="navbar">
-        <div class="logo">Harmonet</div>
+        <div class="logo">MyWallet</div>
         <div class="auth-buttons">
             <button onclick="location.href='{% url 'login' %}'">Login</button>
             <button onclick="location.href='{% url 'register' %}'">Sign Up</button>
@@ -23,10 +23,7 @@
     <div class="hero-content">
       <h1>Save Smarter, Live Better</h1>
       <p>Your financial freedom starts here. Track spending, grow savings, and learn Budgeting with MyWallet.</p>
-      <button onclick="location.href='SignupPage.html'">Get Started</button>
-    </div>
-    <div class="hero-image">
-      <img src="" alt="Banking illustration" />
+      <button onclick="location.href='{% url 'register' %}'">Get Started</button>
     </div>
   </header>
 

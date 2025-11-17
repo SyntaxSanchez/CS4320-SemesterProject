@@ -23,7 +23,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             # Create profile for new user
-            Profile.objects.create(user=user)
+            profile, created = Profile.objects.get_or_create(user=user)
             login(request, user) 
             return redirect('landingPage')  
     else:

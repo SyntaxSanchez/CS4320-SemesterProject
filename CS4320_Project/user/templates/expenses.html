@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Monthly Expenses | Expense Tracker</title>
+  <title>MyWallet | Expense Tracker</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'expenses.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -10,7 +10,7 @@
 
 <body>
   <nav class="navbar">
-    <div class="logo">Expense Tracker</div>
+    <div class="logo">MyWallet</div>
       
     <div class="auth-buttons">
       <a href="{% url 'landingPage' %}" class="btn-dashboard">Dashboard</a>
@@ -20,6 +20,7 @@
 
   <main class="expenses-container">
     <div class="expenses-box">
+      <h1 style="text-align: center; color: #1e2a38; margin-bottom: 2rem;">💸 Expense Tracker</h1>
       <hr class="section-divider" />
   
       <section class="expenses-section">

@@ -10,12 +10,8 @@
 <body>
   <nav class="navbar">
     <div class="logo">MyWallet</div>
-    <ul class="nav-links">
-      <li><a href="{% url 'landingPage' %}">Dashboard</a></li>
-      <li><a href="{% url 'account' %}">Account</a></li>
-      <li><a href="#">Settings</a></li>
-    </ul>
     <div class="auth-buttons">
+      <a href="{% url 'landingPage' %}" class="btn-dashboard">Dashboard</a>
       <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
     </div>
   </nav>
