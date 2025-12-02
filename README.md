@@ -33,28 +33,32 @@ Prerequisite Installations:
 
     
 1. Clone the repository:
-
+    ```
     git clone https://github.com/SyntaxSanchez/CS4320-SemesterProject
-
+    ```
 
 2. Create a virtual environment:
-
+    ```
     python -m venv venv
-   
-    source venv/bin/activate  
+    ```
 
+    ```
+    source venv/bin/activate  
+    ```
 
 4. Install dependencies:
-
+    ```
     pip install -r requirements.txt
-
+    ```
 
 5. Run migrations:
-
+    ```
     python manage.py makemigrations
+    ```
 
+    ```
     python manage.py migrate
-
+    ```
 
 6. Run the development local server:
 
