@@ -21,17 +21,15 @@ A Django-based web application for tracking expenses, managing debt, and plannin
 
 ## Installation
 
-Prerequisite
+Prerequisite Installations:
 
+    Latest Verison of Python 3.8+
 
-Latest Verison of Django
+    Latest Verison of - Git
 
-    pip install django
+    Latest Verison of - pip
 
-Latest Verison of Git
-
-    https://git-scm.com/install/windows
-
+    Django
 
     
 1. Clone the repository:
@@ -58,9 +56,11 @@ Latest Verison of Git
     python manage.py migrate
 
 
-6. Run the development server:
+6. Run the development local server:
 
-    python manage.py runserver
+   ( port depends on user local network: we are using 3000 )
+
+    python manage.py runserver 3000
 
 
 
