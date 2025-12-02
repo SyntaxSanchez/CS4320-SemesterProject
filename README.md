@@ -45,16 +45,16 @@ source venv/bin/activate
 
 
 3. Install dependencies:
-```bash
+
 pip install -r requirements.txt
-```
+
 
 4. Run migrations:
 
 python manage.py makemigrations
 
 python manage.py migrate
-```
+
 
 5. Run the development server:
 
