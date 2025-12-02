@@ -21,10 +21,21 @@ A Django-based web application for tracking expenses, managing debt, and plannin
 
 ## Installation
 
+Prerequisite
+
+
+Latest Verison of Django
+
+    pip install django
+
+Latest Verison of Git
+
+    https://git-scm.com/install/windows
+
+    
 1. Clone the repository:
 
 git clone https://github.com/SyntaxSanchez/CS4320-SemesterProject
-cd mywallet
 
 
 2. Create a virtual environment:
@@ -41,9 +52,11 @@ pip install -r requirements.txt
 4. Run migrations:
 
 python manage.py makemigrations
+
 python manage.py migrate
 ```
-Run the development server:
+
+5. Run the development server:
 
 python manage.py runserver
 
