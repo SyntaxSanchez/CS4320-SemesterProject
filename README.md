@@ -23,13 +23,13 @@ A Django-based web application for tracking expenses, managing debt, and plannin
 
 Prerequisite Installations:
 
-    Latest Verison of Python 3.8+
+Python 3.8+
 
-    Latest Verison of - Git
+Git
 
-    Latest Verison of - pip
+pip
 
-    Django
+Django
 
     
 1. Clone the repository:
@@ -64,8 +64,9 @@ Prerequisite Installations:
 
    ( port depends on user local network: we are using 3000 )
 
+    ```
     python manage.py runserver 3000
-
+    ```
 
 
 ## 📝 License
