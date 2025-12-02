@@ -32,33 +32,35 @@ Latest Verison of Git
 
     https://git-scm.com/install/windows
 
+
     
 1. Clone the repository:
 
-git clone https://github.com/SyntaxSanchez/CS4320-SemesterProject
+    git clone https://github.com/SyntaxSanchez/CS4320-SemesterProject
 
 
 2. Create a virtual environment:
 
-python -m venv venv
-source venv/bin/activate  
+    python -m venv venv
+   
+    source venv/bin/activate  
 
 
-3. Install dependencies:
+4. Install dependencies:
 
-pip install -r requirements.txt
-
-
-4. Run migrations:
-
-python manage.py makemigrations
-
-python manage.py migrate
+    pip install -r requirements.txt
 
 
-5. Run the development server:
+5. Run migrations:
 
-python manage.py runserver
+    python manage.py makemigrations
+
+    python manage.py migrate
+
+
+6. Run the development server:
+
+    python manage.py runserver
 
 
 
