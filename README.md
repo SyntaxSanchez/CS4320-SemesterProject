@@ -36,22 +36,28 @@ Django
     ```
     git clone https://github.com/SyntaxSanchez/CS4320-SemesterProject
     ```
+    
+    ```
+    cd CS4320-SemesterProject
+    ```
+2. Create a virtual environment (or use the one already in there ):
+    ```
+    python3 -m venv myenv --system-site-packages
+    source myenv/bin/activate
 
-2. Create a virtual environment:
     ```
-    python -m venv venv
+    
+    Or use the one already installed
     ```
-
-    ```
-    source venv/bin/activate  
+    source cs4320/bin/activate
     ```
 
-4. Install dependencies:
+3. Go into the Project:
     ```
-    pip install -r requirements.txt
+    cd CS4320_Project
     ```
 
-5. Run migrations:
+4. Run migrations:
     ```
     python manage.py makemigrations
     ```
@@ -60,7 +66,7 @@ Django
     python manage.py migrate
     ```
 
-6. Run the development local server:
+5. Run the development local server:
 
    ( port depends on user local network: we are using 3000 )
 
